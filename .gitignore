@@ -4,6 +4,8 @@ out
 build
 dist
 typedoc-site
+artifacts
+backups
 
 .env
 .env.*
