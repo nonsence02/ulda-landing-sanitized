@@ -3,16 +3,21 @@ import { siteConfig } from "@/lib/site"
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-card/50">
-      <div className="container mx-auto px-4 md:px-6 py-8">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-center sm:text-left">
-            <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} {siteConfig.shortName}.</p>
-            <p className="text-xs text-muted-foreground/70 mt-1">
+    <footer className="border-t border-border/50 bg-card/40">
+      <div className="container mx-auto px-4 py-8 md:px-6 md:py-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="text-center md:text-left">
+            <p className="text-sm text-muted-foreground">
+              &copy; {new Date().getFullYear()} {siteConfig.shortName}.
+            </p>
+            <p className="mt-1 max-w-md text-xs leading-5 text-muted-foreground/70">
               Публічна академічна сторінка бакалаврської роботи з безстанової автентифікації.
             </p>
           </div>
-          <nav aria-label="Навігація нижнього колонтитула" className="flex items-center gap-4 text-sm text-muted-foreground">
+          <nav
+            aria-label="Навігація нижнього колонтитула"
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground md:justify-end"
+          >
             <Link href="#main-content" className="hover:text-primary transition-colors">
               На початок
             </Link>
