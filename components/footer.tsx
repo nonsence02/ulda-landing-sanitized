@@ -12,19 +12,25 @@ export function Footer() {
               Публічна академічна сторінка бакалаврської роботи з безстанової автентифікації.
             </p>
           </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <nav aria-label="Навігація нижнього колонтитула" className="flex items-center gap-4 text-sm text-muted-foreground">
             <Link href="#main-content" className="hover:text-primary transition-colors">
               На початок
             </Link>
-            <span className="text-muted-foreground/50">|</span>
-            <Link href={siteConfig.repositoryUrl} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+            <span aria-hidden="true" className="text-muted-foreground/50">|</span>
+            <Link
+              href={siteConfig.repositoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Відкрити публічний репозиторій бакалаврського проєкту"
+              className="hover:text-primary transition-colors"
+            >
               Репозиторій
             </Link>
-            <span className="text-muted-foreground/50">|</span>
+            <span aria-hidden="true" className="text-muted-foreground/50">|</span>
             <Link href="#contacts-title" className="hover:text-primary transition-colors">
               Контакти
             </Link>
-          </div>
+          </nav>
         </div>
       </div>
     </footer>
