@@ -56,7 +56,7 @@ export default function LandingPage() {
             className="border-b border-border/60 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.14),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
           >
             <div className="section-shell py-14 md:py-20 xl:py-24">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.9fr)] xl:gap-12">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.9fr)] lg:items-start xl:gap-12">
                 <header className="space-y-6 self-center">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90 sm:text-sm">
@@ -94,7 +94,7 @@ export default function LandingPage() {
                   </nav>
                 </header>
 
-                <aside aria-labelledby="project-summary-title" className="space-y-5 lg:space-y-6">
+                <aside aria-labelledby="project-summary-title" className="space-y-5 self-start lg:space-y-6">
                   <figure className="flex min-h-[220px] items-center justify-center rounded-2xl border border-border/70 bg-card/50 p-6 sm:min-h-[260px] md:p-8">
                     <Image
                       src="/logomark.png"
@@ -106,7 +106,7 @@ export default function LandingPage() {
                     />
                   </figure>
 
-                  <Card className="h-full border-border/70 bg-card/70">
+                  <Card className="border-border/70 bg-card/70">
                     <CardHeader>
                       <CardTitle id="project-summary-title" className="text-xl">
                         {content.projectSummaryTitle}
@@ -192,7 +192,7 @@ export default function LandingPage() {
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
-                <CardContent className="pt-6 text-sm leading-7 text-muted-foreground">
+                <CardContent className="flex min-h-[168px] items-center pt-6 text-sm leading-7 text-muted-foreground sm:min-h-[176px]">
                   <p>{content.relevance}</p>
                 </CardContent>
               </Card>
@@ -207,7 +207,7 @@ export default function LandingPage() {
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
-                <CardContent className="pt-6 text-sm leading-7 text-muted-foreground">
+                <CardContent className="flex min-h-[168px] items-center pt-6 text-sm leading-7 text-muted-foreground sm:min-h-[176px]">
                   <p>{content.goal}</p>
                 </CardContent>
               </Card>
