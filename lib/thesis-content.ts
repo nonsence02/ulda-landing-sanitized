@@ -53,4 +53,35 @@ export const thesisContent = {
       href: "https://github.com/nonsence02/ulda-landing-sanitized",
     },
   ] satisfies ThesisContact[],
+  links: [
+    {
+      label: "Повний текст",
+      href: "https://github.com/nonsence02/ulda-landing-sanitized#readme",
+      description: "Поточна публічна версія змісту та структури бакалаврської роботи.",
+    },
+    {
+      label: "Репозиторій",
+      href: "https://github.com/nonsence02/ulda-landing-sanitized",
+      description: "Вихідний код і матеріали публічної sanitized-версії академічного лендингу.",
+    },
+    {
+      label: "Документація",
+      href: "https://doc.ulda.io",
+      description: "Відкриті матеріали, пов'язані з протоколами та технічним контекстом ULDA.",
+    },
+  ],
+  visualFlow: [
+    {
+      title: "Клієнтський вузол",
+      text: "Формує запит без тривалого серверного стану та мінімізує службові сліди взаємодії.",
+    },
+    {
+      title: "Privacy-preserving routing",
+      text: "Передбачає контрольовану мережеву маршрутизацію та зменшення обсягу розкритих метаданих.",
+    },
+    {
+      title: "Stateless verification",
+      text: "Перевірка автентичності базується на токенах, протоколах і правилах валідації без сесійної залежності.",
+    },
+  ],
 } as const

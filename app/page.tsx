@@ -67,6 +67,9 @@ export default function LandingPage() {
                     <Button asChild>
                       <Link href="#thesis-overview">Перейти до змісту</Link>
                     </Button>
+                    <Button asChild variant="outline">
+                      <Link href="#project-links">Корисні матеріали</Link>
+                    </Button>
                   </nav>
                 </header>
 
@@ -309,6 +312,109 @@ export default function LandingPage() {
                   </ul>
                 </CardContent>
               </Card>
+            </div>
+          </section>
+
+          <section id="project-links" aria-labelledby="links-title" className="py-8 md:py-10">
+            <div className="container mx-auto max-w-6xl px-4 md:px-6">
+              <header className="mb-6 max-w-3xl space-y-3">
+                <h2 id="links-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                  Корисні матеріали
+                </h2>
+                <p className="text-sm leading-6 text-muted-foreground md:text-base">
+                  Розділ містить публічні посилання на поточний текстовий опис дослідження, репозиторій і технічну
+                  документацію, пов'язану з предметною областю.
+                </p>
+              </header>
+              <div className="grid gap-6 lg:grid-cols-3">
+                {thesisContent.links.map((item) => (
+                  <Card key={item.label} className="border-border/70 bg-card/60">
+                    <CardHeader>
+                      <CardTitle className="text-lg">{item.label}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4 pt-0 text-sm leading-6 text-muted-foreground">
+                      <p>{item.description}</p>
+                      <Button asChild variant="outline">
+                        <Link href={item.href} target="_blank" rel="noopener noreferrer">
+                          Відкрити <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section aria-labelledby="visual-title" className="py-8 md:py-10">
+            <div className="container mx-auto max-w-6xl px-4 md:px-6">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
+                <div>
+                  <header className="mb-6 max-w-3xl space-y-3">
+                    <h2 id="visual-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                      Ілюстративна модель дослідження
+                    </h2>
+                    <p className="text-sm leading-6 text-muted-foreground md:text-base">
+                      Схематичне представлення демонструє, як безстанова автентифікація, мережева маршрутизація та
+                      мінімізація метаданих поєднуються в єдиній архітектурній моделі вебсервісу.
+                    </p>
+                  </header>
+
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {thesisContent.visualFlow.map((item, index) => (
+                      <Card key={item.title} className="relative overflow-hidden border-border/70 bg-card/60">
+                        <CardHeader>
+                          <div className="flex items-center gap-3">
+                            <span
+                              aria-hidden="true"
+                              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary"
+                            >
+                              {index + 1}
+                            </span>
+                            <CardTitle className="text-lg">{item.title}</CardTitle>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="pt-0 text-sm leading-6 text-muted-foreground">
+                          <p>{item.text}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+
+                <aside aria-labelledby="visual-diagram-title">
+                  <Card className="border-border/70 bg-card/70">
+                    <CardHeader>
+                      <CardTitle id="visual-diagram-title" className="text-xl">
+                        Архітектурний акцент
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div
+                        className="relative rounded-xl border border-border/70 bg-background/60 p-6"
+                        aria-label="Схема взаємодії клієнта, мережевого шару та stateless verification"
+                      >
+                        <div className="space-y-4">
+                          <div className="rounded-lg border border-border/70 bg-card/80 p-4 text-sm text-muted-foreground">
+                            <p className="font-medium text-foreground">Client request</p>
+                            <p>Анонімізований запит із мінімізованими службовими атрибутами.</p>
+                          </div>
+                          <div aria-hidden="true" className="mx-auto h-10 w-px bg-border" />
+                          <div className="rounded-lg border border-primary/40 bg-primary/5 p-4 text-sm text-muted-foreground">
+                            <p className="font-medium text-foreground">Network mediation layer</p>
+                            <p>Контроль розкриття метаданих і керування протоколами взаємодії.</p>
+                          </div>
+                          <div aria-hidden="true" className="mx-auto h-10 w-px bg-border" />
+                          <div className="rounded-lg border border-border/70 bg-card/80 p-4 text-sm text-muted-foreground">
+                            <p className="font-medium text-foreground">Stateless validation</p>
+                            <p>Перевірка запиту без серверної сесії як постійного джерела стану.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </aside>
+              </div>
             </div>
           </section>
 
