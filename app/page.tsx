@@ -1,4 +1,4 @@
- "use client"
+"use client"
 
 import { useState } from "react"
 import Image from "next/image"
@@ -11,36 +11,37 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { siteConfig } from "@/lib/site"
 import { thesisContent, type Language } from "@/lib/thesis-content"
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: siteConfig.titleUk,
-  description: siteConfig.description,
-  inLanguage: "uk",
-  url: siteConfig.url,
-  isPartOf: {
-    "@type": "WebSite",
-    name: siteConfig.shortName,
-    url: siteConfig.url,
-  },
-  about: siteConfig.topics,
-  mainEntity: {
-    "@type": "CreativeWork",
-    name: siteConfig.titleUkFull,
-    alternateName: siteConfig.titleEnFull,
-    author: {
-      "@type": "Person",
-      name: siteConfig.authorName,
-    },
-    educationalLevel: "Bachelor",
-    inLanguage: ["uk", "en"],
-    keywords: siteConfig.keywords.join(", "),
-  },
-}
+const overviewIcons = [BookOpenText, ShieldCheck, Network, FileText]
 
 export default function LandingPage() {
   const [language, setLanguage] = useState<Language>("uk")
   const content = thesisContent[language]
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: content.title,
+    description: content.shortDescription,
+    inLanguage: language,
+    url: siteConfig.url,
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.shortName,
+      url: siteConfig.url,
+    },
+    about: siteConfig.topics,
+    mainEntity: {
+      "@type": "CreativeWork",
+      name: content.titleFull,
+      alternateName: content.alternateTitle,
+      author: {
+        "@type": "Person",
+        name: siteConfig.authorName,
+      },
+      educationalLevel: "Bachelor",
+      inLanguage: ["uk", "en"],
+      keywords: content.keywords.join(", "),
+    },
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -48,7 +49,7 @@ export default function LandingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main id="main-content" className="flex-grow">
+      <main id="main-content" className="flex-grow" lang={language}>
         <article aria-labelledby="hero-title">
           <section
             aria-labelledby="hero-title"
@@ -129,82 +130,32 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading md:mb-10">
                 <h2 id="overview-title" className="section-title">
-                  Зміст дослідження
+                  {content.overviewTitle}
                 </h2>
-                <p className="section-copy">
-                  Нижче подано ключові змістові блоки бакалаврської роботи, підготовлені для публічної презентації
-                  теми, мети та результатів дослідження.
-                </p>
+                <p className="section-copy">{content.overviewDescription}</p>
               </header>
 
               <div className="grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
-                <section aria-labelledby="overview-description-title">
-                  <Card className="h-full border-border/70 bg-card/60">
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <BookOpenText aria-hidden="true" className="h-5 w-5 text-primary" />
-                        <CardTitle id="overview-description-title" className="text-lg">
-                          Короткий опис
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-sm leading-6 text-muted-foreground">
-                      Публічна сторінка презентує тему бакалаврської роботи, присвяченої безстановій автентифікації,
-                      мінімізації метаданих і мережевим протоколам приватної взаємодії у вебсервісах.
-                    </CardContent>
-                  </Card>
-                </section>
+                {content.overviewCards.map((card, index) => {
+                  const Icon = overviewIcons[index]
+                  const titleId = `overview-card-${index}`
 
-                <section aria-labelledby="overview-privacy-title">
-                  <Card className="h-full border-border/70 bg-card/60">
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <ShieldCheck aria-hidden="true" className="h-5 w-5 text-primary" />
-                        <CardTitle id="overview-privacy-title" className="text-lg">
-                          Приватність
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-sm leading-6 text-muted-foreground">
-                      Дослідження орієнтоване на зменшення службової інформації, що розкривається під час
-                      автентифікації, маршрутизації запитів та супроводу клієнтських сесій.
-                    </CardContent>
-                  </Card>
-                </section>
-
-                <section aria-labelledby="overview-protocols-title">
-                  <Card className="h-full border-border/70 bg-card/60">
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <Network aria-hidden="true" className="h-5 w-5 text-primary" />
-                        <CardTitle id="overview-protocols-title" className="text-lg">
-                          Протоколи
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-sm leading-6 text-muted-foreground">
-                      Окрему увагу приділено моделюванню мережевої інфраструктури, послідовності обміну повідомленнями
-                      та правилам анонімної взаємодії клієнтів у вебдодатках.
-                    </CardContent>
-                  </Card>
-                </section>
-
-                <section aria-labelledby="overview-extensibility-title">
-                  <Card className="h-full border-border/70 bg-card/60">
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <FileText aria-hidden="true" className="h-5 w-5 text-primary" />
-                        <CardTitle id="overview-extensibility-title" className="text-lg">
-                          Розширюваність
-                        </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="text-sm leading-6 text-muted-foreground">
-                      Структура сторінки підготовлена для поступового додавання повного тексту, ілюстративних
-                      матеріалів, посилань на документацію та супровідних академічних матеріалів.
-                    </CardContent>
-                  </Card>
-                </section>
+                  return (
+                    <section key={card.title} aria-labelledby={titleId}>
+                      <Card className="h-full border-border/70 bg-card/60">
+                        <CardHeader>
+                          <div className="flex items-center gap-3">
+                            <Icon aria-hidden="true" className="h-5 w-5 text-primary" />
+                            <CardTitle id={titleId} className="text-lg">
+                              {card.title}
+                            </CardTitle>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="text-sm leading-6 text-muted-foreground">{card.text}</CardContent>
+                      </Card>
+                    </section>
+                  )
+                })}
               </div>
             </div>
           </section>
@@ -213,15 +164,12 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="keywords-title" className="section-title">
-                  Ключові слова
+                  {content.keywordsTitle}
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
                 <CardContent className="pt-6">
-                  <ul
-                    className="flex flex-wrap gap-2.5 text-sm text-muted-foreground sm:gap-3"
-                    aria-label="Ключові слова дослідження"
-                  >
+                  <ul className="flex flex-wrap gap-2.5 text-sm text-muted-foreground sm:gap-3" aria-label={content.keywordsTitle}>
                     {content.keywords.map((keyword) => (
                       <li
                         key={keyword}
@@ -240,7 +188,7 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="relevance-title" className="section-title">
-                  Актуальність теми
+                  {content.relevanceTitle}
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
@@ -255,7 +203,7 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="goals-title" className="section-title">
-                  Мета дослідження
+                  {content.goalTitle}
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
@@ -270,14 +218,14 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="tasks-title" className="section-title">
-                  Завдання та очікувані результати
+                  {content.tasksTitle}
                 </h2>
               </header>
               <div className="grid gap-5 lg:grid-cols-2 xl:gap-6">
                 <section aria-labelledby="tasks-list-title">
                   <Card className="h-full border-border/70 bg-card/60">
                     <CardHeader>
-                      <CardTitle id="tasks-list-title">Завдання</CardTitle>
+                      <CardTitle id="tasks-list-title">{content.tasksCardTitle}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3 text-sm leading-6 text-muted-foreground">
@@ -295,7 +243,7 @@ export default function LandingPage() {
                 <section aria-labelledby="results-title">
                   <Card className="h-full border-border/70 bg-card/60">
                     <CardHeader>
-                      <CardTitle id="results-title">Очікувані результати</CardTitle>
+                      <CardTitle id="results-title">{content.expectedResultsCardTitle}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3 text-sm leading-6 text-muted-foreground">
@@ -317,7 +265,7 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="methodology-title" className="section-title">
-                  Методологія дослідження
+                  {content.methodologyTitle}
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
@@ -339,12 +287,9 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="links-title" className="section-title">
-                  Корисні матеріали
+                  {content.linksTitle}
                 </h2>
-                <p className="section-copy">
-                  Розділ містить публічні посилання на поточний текстовий опис дослідження, репозиторій і технічну
-                  документацію, пов'язану з предметною областю.
-                </p>
+                <p className="section-copy">{content.linksDescription}</p>
               </header>
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
                 {content.links.map((item) => (
@@ -356,7 +301,7 @@ export default function LandingPage() {
                       <p>{item.description}</p>
                       <Button asChild variant="outline">
                         <Link href={item.href} target="_blank" rel="noopener noreferrer">
-                          Відкрити <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                          {language === "uk" ? "Відкрити" : "Open"} <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                         </Link>
                       </Button>
                     </CardContent>
@@ -372,12 +317,9 @@ export default function LandingPage() {
                 <div>
                   <header className="section-heading">
                     <h2 id="visual-title" className="section-title">
-                      Ілюстративна модель дослідження
+                      {content.visualTitle}
                     </h2>
-                    <p className="section-copy">
-                      Схематичне представлення демонструє, як безстанова автентифікація, мережева маршрутизація та
-                      мінімізація метаданих поєднуються в єдиній архітектурній моделі вебсервісу.
-                    </p>
+                    <p className="section-copy">{content.visualDescription}</p>
                   </header>
 
                   <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -406,29 +348,32 @@ export default function LandingPage() {
                   <Card className="border-border/70 bg-card/70">
                     <CardHeader>
                       <CardTitle id="visual-diagram-title" className="text-xl">
-                        Архітектурний акцент
+                        {content.visualAsideTitle}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div
                         className="relative rounded-xl border border-border/70 bg-background/60 p-4 sm:p-5 md:p-6"
-                        aria-label="Схема взаємодії клієнта, мережевого шару та stateless verification"
+                        aria-label={content.visualDiagramLabel}
                       >
                         <div className="space-y-4">
-                          <div className="rounded-lg border border-border/70 bg-card/80 p-4 text-sm text-muted-foreground">
-                            <p className="font-medium text-foreground">Client request</p>
-                            <p>Анонімізований запит із мінімізованими службовими атрибутами.</p>
-                          </div>
-                          <div aria-hidden="true" className="mx-auto h-10 w-px bg-border" />
-                          <div className="rounded-lg border border-primary/40 bg-primary/5 p-4 text-sm text-muted-foreground">
-                            <p className="font-medium text-foreground">Network mediation layer</p>
-                            <p>Контроль розкриття метаданих і керування протоколами взаємодії.</p>
-                          </div>
-                          <div aria-hidden="true" className="mx-auto h-10 w-px bg-border" />
-                          <div className="rounded-lg border border-border/70 bg-card/80 p-4 text-sm text-muted-foreground">
-                            <p className="font-medium text-foreground">Stateless validation</p>
-                            <p>Перевірка запиту без серверної сесії як постійного джерела стану.</p>
-                          </div>
+                          {content.visualAsideBlocks.map((block, index) => (
+                            <div key={block.title}>
+                              <div
+                                className={
+                                  index === 1
+                                    ? "rounded-lg border border-primary/40 bg-primary/5 p-4 text-sm text-muted-foreground"
+                                    : "rounded-lg border border-border/70 bg-card/80 p-4 text-sm text-muted-foreground"
+                                }
+                              >
+                                <p className="font-medium text-foreground">{block.title}</p>
+                                <p>{block.text}</p>
+                              </div>
+                              {index < content.visualAsideBlocks.length - 1 ? (
+                                <div aria-hidden="true" className="mx-auto h-10 w-px bg-border" />
+                              ) : null}
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </CardContent>
@@ -442,7 +387,7 @@ export default function LandingPage() {
             <div className="section-shell">
               <header className="section-heading">
                 <h2 id="contacts-title" className="section-title">
-                  Контактна інформація
+                  {content.contactsTitle}
                 </h2>
               </header>
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
@@ -472,7 +417,12 @@ export default function LandingPage() {
           </section>
         </article>
       </main>
-      <Footer />
+      <Footer
+        description={content.footerDescription}
+        topLabel={content.footerTopLabel}
+        repositoryLabel={content.footerRepositoryLabel}
+        contactsLabel={content.footerContactsLabel}
+      />
     </div>
   )
 }
