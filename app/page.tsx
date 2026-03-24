@@ -36,52 +36,63 @@ const structuredData = {
 
 export default function LandingPage() {
   return (
-    <div className="bg-background text-foreground min-h-screen flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <main id="main-content" className="flex-grow">
         <article aria-labelledby="hero-title">
-          <section aria-labelledby="hero-title" className="border-b border-border/60">
-            <div className="container mx-auto max-w-6xl px-4 py-16 md:px-6 md:py-24">
-              <div className="grid gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(320px,0.9fr)] lg:items-start">
-                <header className="space-y-6">
-                  <p className="text-sm font-medium uppercase tracking-[0.18em] text-primary">
+          <section
+            aria-labelledby="hero-title"
+            className="border-b border-border/60 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.14),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
+          >
+            <div className="container mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20 xl:py-24">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.9fr)] xl:gap-12">
+                <header className="space-y-6 self-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90 sm:text-sm">
                     Бакалаврська робота • Content Implementation
                   </p>
-                  <div className="space-y-4">
-                    <h1 id="hero-title" className="text-4xl font-semibold tracking-tight md:text-5xl">
+                  <div className="space-y-5">
+                    <h1
+                      id="hero-title"
+                      className="max-w-4xl text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl xl:text-6xl"
+                    >
                       {siteConfig.titleUk}
                     </h1>
-                    <p className="text-lg text-muted-foreground md:text-xl">
+                    <p className="max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg md:text-xl">
                       Мережева інфраструктура та протоколи анонімної взаємодії клієнтів у вебдодатках із застосуванням
                       безстанової автентифікації.
                     </p>
-                    <p className="text-base text-muted-foreground md:text-lg">{siteConfig.titleEn}</p>
+                    <p className="max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base md:text-lg">
+                      {siteConfig.titleEn}
+                    </p>
                   </div>
-                  <p className="max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
+                  <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base md:text-lg">
                     {thesisContent.shortDescription}
                   </p>
-                  <nav aria-label="Основні дії сторінки" className="flex flex-col gap-3 sm:flex-row">
-                    <Button asChild>
+                  <nav
+                    aria-label="Основні дії сторінки"
+                    className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap"
+                  >
+                    <Button asChild size="lg" className="sm:min-w-[200px]">
                       <Link href="#thesis-overview">Перейти до змісту</Link>
                     </Button>
-                    <Button asChild variant="outline">
+                    <Button asChild variant="outline" size="lg" className="sm:min-w-[200px]">
                       <Link href="#project-links">Корисні матеріали</Link>
                     </Button>
                   </nav>
                 </header>
 
-                <aside aria-labelledby="project-summary-title" className="space-y-6">
-                  <figure className="flex items-center justify-center rounded-lg border border-border/70 bg-card/50 p-6">
+                <aside aria-labelledby="project-summary-title" className="space-y-5 lg:space-y-6">
+                  <figure className="flex min-h-[220px] items-center justify-center rounded-2xl border border-border/70 bg-card/50 p-6 sm:min-h-[260px] md:p-8">
                     <Image
                       src="/logomark.png"
                       alt="Символічний логотип ULDA як візуальний маркер дослідження приватності та безстанової автентифікації"
                       width={160}
                       height={160}
                       priority
-                      className="h-24 w-24 rounded-lg shadow-md md:h-32 md:w-32"
+                      className="h-24 w-24 rounded-xl shadow-md sm:h-28 sm:w-28 md:h-32 md:w-32"
                     />
                   </figure>
 
@@ -111,10 +122,10 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section id="thesis-overview" aria-labelledby="overview-title" className="py-14 md:py-20">
+          <section id="thesis-overview" aria-labelledby="overview-title" className="py-12 md:py-16 xl:py-20">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-8 max-w-3xl space-y-3">
-                <h2 id="overview-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+              <header className="mb-8 max-w-3xl space-y-3 md:mb-10">
+                <h2 id="overview-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Зміст дослідження
                 </h2>
                 <p className="text-sm leading-6 text-muted-foreground md:text-base">
@@ -123,7 +134,7 @@ export default function LandingPage() {
                 </p>
               </header>
 
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              <div className="grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
                 <section aria-labelledby="overview-description-title">
                   <Card className="h-full border-border/70 bg-card/60">
                     <CardHeader>
@@ -195,18 +206,24 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="keywords-title" className="py-8 md:py-10">
+          <section aria-labelledby="keywords-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="keywords-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="keywords-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Ключові слова
                 </h2>
               </header>
               <Card className="border-border/70 bg-card/60">
                 <CardContent className="pt-6">
-                  <ul className="flex flex-wrap gap-3 text-sm text-muted-foreground" aria-label="Ключові слова дослідження">
+                  <ul
+                    className="flex flex-wrap gap-2.5 text-sm text-muted-foreground sm:gap-3"
+                    aria-label="Ключові слова дослідження"
+                  >
                     {thesisContent.keywords.map((keyword) => (
-                      <li key={keyword} className="rounded-full border border-border/80 bg-background/60 px-4 py-2">
+                      <li
+                        key={keyword}
+                        className="rounded-full border border-border/80 bg-background/60 px-3 py-2 text-sm sm:px-4"
+                      >
                         {keyword}
                       </li>
                     ))}
@@ -216,10 +233,10 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="relevance-title" className="py-8 md:py-10">
+          <section aria-labelledby="relevance-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="relevance-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="relevance-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Актуальність теми
                 </h2>
               </header>
@@ -231,10 +248,10 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="goals-title" className="py-8 md:py-10">
+          <section aria-labelledby="goals-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="goals-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="goals-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Мета дослідження
                 </h2>
               </header>
@@ -246,14 +263,14 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="tasks-title" className="py-8 md:py-10">
+          <section aria-labelledby="tasks-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="tasks-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="tasks-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Завдання та очікувані результати
                 </h2>
               </header>
-              <div className="grid gap-6 lg:grid-cols-2">
+              <div className="grid gap-5 lg:grid-cols-2 xl:gap-6">
                 <section aria-labelledby="tasks-list-title">
                   <Card className="h-full border-border/70 bg-card/60">
                     <CardHeader>
@@ -293,10 +310,10 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="methodology-title" className="py-8 md:py-10">
+          <section aria-labelledby="methodology-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="methodology-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="methodology-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Методологія дослідження
                 </h2>
               </header>
@@ -315,10 +332,10 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section id="project-links" aria-labelledby="links-title" className="py-8 md:py-10">
+          <section id="project-links" aria-labelledby="links-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="links-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="links-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Корисні матеріали
                 </h2>
                 <p className="text-sm leading-6 text-muted-foreground md:text-base">
@@ -326,7 +343,7 @@ export default function LandingPage() {
                   документацію, пов'язану з предметною областю.
                 </p>
               </header>
-              <div className="grid gap-6 lg:grid-cols-3">
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
                 {thesisContent.links.map((item) => (
                   <Card key={item.label} className="border-border/70 bg-card/60">
                     <CardHeader>
@@ -346,12 +363,12 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="visual-title" className="py-8 md:py-10">
+          <section aria-labelledby="visual-title" className="py-8 md:py-10 xl:py-12">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
+              <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:items-start xl:gap-8">
                 <div>
                   <header className="mb-6 max-w-3xl space-y-3">
-                    <h2 id="visual-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                    <h2 id="visual-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                       Ілюстративна модель дослідження
                     </h2>
                     <p className="text-sm leading-6 text-muted-foreground md:text-base">
@@ -360,7 +377,7 @@ export default function LandingPage() {
                     </p>
                   </header>
 
-                  <div className="grid gap-4 md:grid-cols-3">
+                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                     {thesisContent.visualFlow.map((item, index) => (
                       <Card key={item.title} className="relative overflow-hidden border-border/70 bg-card/60">
                         <CardHeader>
@@ -382,7 +399,7 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                <aside aria-labelledby="visual-diagram-title">
+                <aside aria-labelledby="visual-diagram-title" className="lg:sticky lg:top-6">
                   <Card className="border-border/70 bg-card/70">
                     <CardHeader>
                       <CardTitle id="visual-diagram-title" className="text-xl">
@@ -391,7 +408,7 @@ export default function LandingPage() {
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div
-                        className="relative rounded-xl border border-border/70 bg-background/60 p-6"
+                        className="relative rounded-xl border border-border/70 bg-background/60 p-4 sm:p-5 md:p-6"
                         aria-label="Схема взаємодії клієнта, мережевого шару та stateless verification"
                       >
                         <div className="space-y-4">
@@ -418,14 +435,14 @@ export default function LandingPage() {
             </div>
           </section>
 
-          <section aria-labelledby="contacts-title" className="py-8 pb-16 md:py-10 md:pb-20">
+          <section aria-labelledby="contacts-title" className="py-8 pb-14 md:py-10 md:pb-16 xl:py-12 xl:pb-20">
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="contacts-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 id="contacts-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
                   Контактна інформація
                 </h2>
               </header>
-              <div className="grid gap-6 lg:grid-cols-3">
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
                 {thesisContent.contacts.map((contact) => (
                   <Card key={contact.label} className="border-border/70 bg-card/60">
                     <CardHeader>
