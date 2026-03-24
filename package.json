@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix --max-warnings=0",
+    "lint": "eslint app components lib *.ts *.mjs --max-warnings=0",
+    "lint:fix": "eslint app components lib *.ts *.mjs --fix --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck",
+    "docs:build": "typedoc",
+    "docs:check": "npm run docs:build",
     "prepare": "husky"
   },
   "dependencies": {
@@ -38,6 +40,7 @@
     "lint-staged": "^16.4.0",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
+    "typedoc": "^0.28.18",
     "typescript": "^5",
     "typescript-eslint": "^8.57.2"
   },

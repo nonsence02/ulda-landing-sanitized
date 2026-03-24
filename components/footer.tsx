@@ -1,13 +1,19 @@
 import Link from "next/link"
 import { siteConfig } from "@/lib/site"
 
-type FooterProps = {
+export interface FooterProps {
   description: string
   topLabel: string
   repositoryLabel: string
   contactsLabel: string
 }
 
+/**
+ * Renders the shared footer with repository navigation and in-page links.
+ *
+ * @param props - Localized labels and description displayed in the footer.
+ * @returns The footer section for the academic landing page.
+ */
 export function Footer({ description, topLabel, repositoryLabel, contactsLabel }: FooterProps) {
   return (
     <footer className="border-t border-border/50 bg-card/40">

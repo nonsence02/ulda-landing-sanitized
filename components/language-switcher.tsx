@@ -3,7 +3,7 @@
 import type { Language } from "@/lib/thesis-content"
 import { cn } from "@/lib/utils"
 
-type LanguageSwitcherProps = {
+export interface LanguageSwitcherProps {
   activeLanguage: Language
   onChange: (language: Language) => void
 }
@@ -13,6 +13,12 @@ const options: Array<{ value: Language; shortLabel: string; longLabel: string }>
   { value: "en", shortLabel: "EN", longLabel: "English" },
 ]
 
+/**
+ * Provides the visible UA/EN switch used by the bilingual landing page.
+ *
+ * @param props - Current language and a callback used to switch the rendered locale.
+ * @returns An accessible segmented control for language selection.
+ */
 export function LanguageSwitcher({ activeLanguage, onChange }: LanguageSwitcherProps) {
   return (
     <div

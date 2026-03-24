@@ -1,0 +1,29 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "app/layout.tsx",
+    "app/page.tsx",
+    "app/robots.ts",
+    "app/sitemap.ts",
+    "components",
+    "lib"
+  ],
+  "entryPointStrategy": "expand",
+  "tsconfig": "tsconfig.json",
+  "out": "typedoc-site",
+  "readme": "docs/architecture.md",
+  "exclude": [
+    "**/*.css",
+    ".next/**",
+    "out/**",
+    "typedoc-site/**"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "includeVersion": true,
+  "treatWarningsAsErrors": true,
+  "sort": [
+    "source-order"
+  ]
+}

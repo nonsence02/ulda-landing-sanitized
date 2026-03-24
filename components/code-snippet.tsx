@@ -5,10 +5,16 @@ import { Copy, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
-interface CodeSnippetProps {
+export interface CodeSnippetProps {
   code: string
 }
 
+/**
+ * Displays a short terminal-style command snippet with clipboard support.
+ *
+ * @param props - The command string to render and copy.
+ * @returns An interactive command snippet block with tooltip feedback.
+ */
 export function CodeSnippet({ code }: CodeSnippetProps) {
   const [copied, setCopied] = useState(false)
 

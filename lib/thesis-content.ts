@@ -1,28 +1,38 @@
 export type Language = "uk" | "en"
 
-type ThesisContact = {
+export type ThesisContact = {
   label: string
   value: string
   href?: string
 }
 
-type ThesisLink = {
+export type ThesisLink = {
   label: string
   href: string
   description: string
 }
 
-type VisualFlowItem = {
+export type VisualFlowItem = {
   title: string
   text: string
 }
 
-type OverviewCard = {
+export type OverviewCard = {
   title: string
   text: string
 }
 
-type ThesisTranslation = {
+export type ThesisSummaryItem = {
+  label: string
+  value: string
+}
+
+export type ThesisVisualAsideBlock = {
+  title: string
+  text: string
+}
+
+export type ThesisTranslation = {
   languageLabel: string
   languageToggleLabel: string
   stageLabel: string
@@ -34,7 +44,7 @@ type ThesisTranslation = {
   heroPrimaryAction: string
   heroSecondaryAction: string
   projectSummaryTitle: string
-  projectSummary: Array<{ label: string; value: string }>
+  projectSummary: ThesisSummaryItem[]
   overviewTitle: string
   overviewDescription: string
   overviewCards: OverviewCard[]
@@ -60,7 +70,7 @@ type ThesisTranslation = {
   visualFlow: VisualFlowItem[]
   visualAsideTitle: string
   visualDiagramLabel: string
-  visualAsideBlocks: Array<{ title: string; text: string }>
+  visualAsideBlocks: ThesisVisualAsideBlock[]
   contactsTitle: string
   contacts: ThesisContact[]
   footerDescription: string
