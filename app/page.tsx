@@ -14,6 +14,15 @@ import type { Language } from "@/lib/thesis-content"
 
 const overviewIcons = [BookOpenText, ShieldCheck, Network, FileText]
 
+/**
+ * Renders the main bilingual bachelor thesis landing page.
+ *
+ * @remarks
+ * The component keeps all visible academic content on the client so that the language
+ * switcher can swap between Ukrainian and English without any backend or routing layer.
+ *
+ * @returns The root page for the public thesis presentation site.
+ */
 export default function LandingPage() {
   const [language, setLanguage] = useState<Language>("uk")
   const content = thesisContent[language]

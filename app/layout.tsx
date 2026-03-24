@@ -4,6 +4,9 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { siteConfig } from "@/lib/site"
 
+/**
+ * Shared metadata for the academic landing page, including SEO and social previews.
+ */
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -52,12 +55,21 @@ export const metadata: Metadata = {
   },
 }
 
+/**
+ * Viewport configuration for the responsive static landing page.
+ */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#0d1117",
 }
 
+/**
+ * Root layout for the App Router tree.
+ *
+ * @param props - Nested route content rendered inside the global page shell.
+ * @returns The top-level HTML structure with skip link and theme provider.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

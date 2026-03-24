@@ -1,4 +1,11 @@
-﻿export const siteConfig = {
+/**
+ * Central site metadata used by the landing page, SEO settings, and deployment URLs.
+ *
+ * @remarks
+ * The object is intentionally static because the repository is public, sanitized, and
+ * deployed as a static academic site without environment-dependent runtime configuration.
+ */
+export const siteConfig = {
   name: "ULDA Thesis Landing",
   shortName: "ULDA Thesis",
   url: "https://nonsence02.github.io/ulda-landing-sanitized",
@@ -25,13 +32,13 @@
     "privacy-preserving authentication",
     "stateless authentication",
     "metadata minimization",
-    "web application security"
+    "web application security",
   ],
   topics: [
     "Stateless authentication",
     "Metadata minimization",
     "Privacy-preserving web services",
     "Anonymous client interaction",
-    "ULDA protocols"
-  ]
+    "ULDA protocols",
+  ],
 } as const

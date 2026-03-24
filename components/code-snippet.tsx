@@ -9,6 +9,12 @@ interface CodeSnippetProps {
   code: string
 }
 
+/**
+ * Displays a short terminal-style command snippet with clipboard support.
+ *
+ * @param props - The command string to render and copy.
+ * @returns An interactive command snippet block with tooltip feedback.
+ */
 export function CodeSnippet({ code }: CodeSnippetProps) {
   const [copied, setCopied] = useState(false)
 

@@ -4,6 +4,9 @@ import { cva } from "class-variance-authority"
 import type { VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
+/**
+ * Centralized style variants shared by buttons and link-like call-to-action controls.
+ */
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-sm [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
@@ -30,10 +33,19 @@ const buttonVariants = cva(
   }
 )
 
+/**
+ * Public button prop contract shared by regular buttons and `asChild` compositions.
+ */
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
+/**
+ * Reusable button component used across content sections and interactive controls.
+ *
+ * @param props - Visual variant, sizing options, and native button props.
+ * @returns A themed button or slotted child element with consistent styling.
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : "button"
   return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />

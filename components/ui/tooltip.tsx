@@ -4,10 +4,22 @@ import * as React from "react"
 import * as TooltipPrimitive from "@radix-ui/react-tooltip"
 import { cn } from "@/lib/utils"
 
+/**
+ * Shared tooltip provider used to coordinate delayed tooltip behavior.
+ */
 const TooltipProvider = TooltipPrimitive.Provider
+/**
+ * Root tooltip primitive re-exported for local UI composition.
+ */
 const Tooltip = TooltipPrimitive.Root
+/**
+ * Trigger primitive used to bind tooltips to interactive controls.
+ */
 const TooltipTrigger = TooltipPrimitive.Trigger
 
+/**
+ * Styled tooltip content wrapper used across interactive helper elements.
+ */
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
