@@ -1,11 +1,15 @@
+ "use client"
+
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, BookOpenText, FileText, Network, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
+import { LanguageSwitcher } from "@/components/language-switcher"
 import { siteConfig } from "@/lib/site"
-import { thesisContent } from "@/lib/thesis-content"
+import { thesisContent, type Language } from "@/lib/thesis-content"
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -35,6 +39,9 @@ const structuredData = {
 }
 
 export default function LandingPage() {
+  const [language, setLanguage] = useState<Language>("uk")
+  const content = thesisContent[language]
+
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <script
@@ -50,36 +57,38 @@ export default function LandingPage() {
             <div className="section-shell py-14 md:py-20 xl:py-24">
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.9fr)] xl:gap-12">
                 <header className="space-y-6 self-center">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90 sm:text-sm">
-                    Бакалаврська робота • Content Implementation
-                  </p>
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90 sm:text-sm">
+                      {content.stageLabel}
+                    </p>
+                    <LanguageSwitcher activeLanguage={language} onChange={setLanguage} />
+                  </div>
                   <div className="space-y-5">
                     <h1
                       id="hero-title"
                       className="max-w-4xl text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl xl:text-6xl"
                     >
-                      {siteConfig.titleUk}
+                      {content.title}
                     </h1>
                     <p className="max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg md:text-xl">
-                      Мережева інфраструктура та протоколи анонімної взаємодії клієнтів у вебдодатках із застосуванням
-                      безстанової автентифікації.
+                      {content.heroLead}
                     </p>
                     <p className="max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base md:text-lg">
-                      {siteConfig.titleEn}
+                      {content.alternateTitle}
                     </p>
                   </div>
                   <p className="max-w-3xl text-sm leading-7 text-muted-foreground sm:text-base md:text-lg">
-                    {thesisContent.shortDescription}
+                    {content.shortDescription}
                   </p>
                   <nav
                     aria-label="Основні дії сторінки"
                     className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap"
                   >
                     <Button asChild size="lg" className="sm:min-w-[200px]">
-                      <Link href="#thesis-overview">Перейти до змісту</Link>
+                      <Link href="#thesis-overview">{content.heroPrimaryAction}</Link>
                     </Button>
                     <Button asChild variant="outline" size="lg" className="sm:min-w-[200px]">
-                      <Link href="#project-links">Корисні матеріали</Link>
+                      <Link href="#project-links">{content.heroSecondaryAction}</Link>
                     </Button>
                   </nav>
                 </header>
@@ -99,22 +108,16 @@ export default function LandingPage() {
                   <Card className="h-full border-border/70 bg-card/70">
                     <CardHeader>
                       <CardTitle id="project-summary-title" className="text-xl">
-                        Профіль дослідження
+                        {content.projectSummaryTitle}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4 text-sm text-muted-foreground">
-                      <div>
-                        <p className="font-medium text-foreground">Тематичний фокус</p>
-                        <p>Stateless authentication, privacy-preserving interaction, metadata minimization.</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">Поточний етап</p>
-                        <p>Розгортання повного змістового шару публічної академічної сторінки.</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">Предмет дослідження</p>
-                        <p>Мережева інфраструктура, приватність та протоколи анонімної взаємодії у вебсервісах.</p>
-                      </div>
+                      {content.projectSummary.map((item) => (
+                        <div key={item.label}>
+                          <p className="font-medium text-foreground">{item.label}</p>
+                          <p>{item.value}</p>
+                        </div>
+                      ))}
                     </CardContent>
                   </Card>
                 </aside>
@@ -219,7 +222,7 @@ export default function LandingPage() {
                     className="flex flex-wrap gap-2.5 text-sm text-muted-foreground sm:gap-3"
                     aria-label="Ключові слова дослідження"
                   >
-                    {thesisContent.keywords.map((keyword) => (
+                    {content.keywords.map((keyword) => (
                       <li
                         key={keyword}
                         className="rounded-full border border-border/80 bg-background/60 px-3 py-2 text-sm sm:px-4"
@@ -242,7 +245,7 @@ export default function LandingPage() {
               </header>
               <Card className="border-border/70 bg-card/60">
                 <CardContent className="pt-6 text-sm leading-7 text-muted-foreground">
-                  <p>{thesisContent.relevance}</p>
+                  <p>{content.relevance}</p>
                 </CardContent>
               </Card>
             </div>
@@ -257,7 +260,7 @@ export default function LandingPage() {
               </header>
               <Card className="border-border/70 bg-card/60">
                 <CardContent className="pt-6 text-sm leading-7 text-muted-foreground">
-                  <p>{thesisContent.goal}</p>
+                  <p>{content.goal}</p>
                 </CardContent>
               </Card>
             </div>
@@ -278,7 +281,7 @@ export default function LandingPage() {
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3 text-sm leading-6 text-muted-foreground">
-                        {thesisContent.tasks.map((task) => (
+                        {content.tasks.map((task) => (
                           <li key={task} className="flex gap-3">
                             <span aria-hidden="true" className="mt-2 h-2 w-2 rounded-full bg-primary" />
                             <span>{task}</span>
@@ -296,7 +299,7 @@ export default function LandingPage() {
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3 text-sm leading-6 text-muted-foreground">
-                        {thesisContent.expectedResults.map((result) => (
+                        {content.expectedResults.map((result) => (
                           <li key={result} className="flex gap-3">
                             <span aria-hidden="true" className="mt-2 h-2 w-2 rounded-full bg-primary" />
                             <span>{result}</span>
@@ -320,7 +323,7 @@ export default function LandingPage() {
               <Card className="border-border/70 bg-card/60">
                 <CardContent className="pt-6">
                   <ul className="space-y-3 text-sm leading-6 text-muted-foreground">
-                    {thesisContent.methodology.map((item) => (
+                    {content.methodology.map((item) => (
                       <li key={item} className="flex gap-3">
                         <span aria-hidden="true" className="mt-2 h-2 w-2 rounded-full bg-primary" />
                         <span>{item}</span>
@@ -344,7 +347,7 @@ export default function LandingPage() {
                 </p>
               </header>
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
-                {thesisContent.links.map((item) => (
+                {content.links.map((item) => (
                   <Card key={item.label} className="border-border/70 bg-card/60">
                     <CardHeader>
                       <CardTitle className="text-lg">{item.label}</CardTitle>
@@ -378,7 +381,7 @@ export default function LandingPage() {
                   </header>
 
                   <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                    {thesisContent.visualFlow.map((item, index) => (
+                    {content.visualFlow.map((item, index) => (
                       <Card key={item.title} className="relative overflow-hidden border-border/70 bg-card/60">
                         <CardHeader>
                           <div className="flex items-center gap-3">
@@ -443,7 +446,7 @@ export default function LandingPage() {
                 </h2>
               </header>
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
-                {thesisContent.contacts.map((contact) => (
+                {content.contacts.map((contact) => (
                   <Card key={contact.label} className="border-border/70 bg-card/60">
                     <CardHeader>
                       <CardTitle className="text-lg">{contact.label}</CardTitle>
