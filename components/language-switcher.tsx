@@ -3,7 +3,7 @@
 import type { Language } from "@/lib/thesis-content"
 import { cn } from "@/lib/utils"
 
-type LanguageSwitcherProps = {
+export interface LanguageSwitcherProps {
   activeLanguage: Language
   onChange: (language: Language) => void
 }

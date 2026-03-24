@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { siteConfig } from "@/lib/site"
 
-type FooterProps = {
+export interface FooterProps {
   description: string
   topLabel: string
   repositoryLabel: string
