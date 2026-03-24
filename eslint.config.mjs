@@ -14,6 +14,7 @@ const ignorePatterns = [
   "node_modules/**",
   "out/**",
   "public/**",
+  "typedoc-site/**",
   "next-env.d.ts",
 ]
 
