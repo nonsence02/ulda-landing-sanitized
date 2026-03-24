@@ -9,7 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { siteConfig } from "@/lib/site"
-import { thesisContent, type Language } from "@/lib/thesis-content"
+import { thesisContent } from "@/lib/thesis-content"
+import type { Language } from "@/lib/thesis-content"
 
 const overviewIcons = [BookOpenText, ShieldCheck, Network, FileText]
 
