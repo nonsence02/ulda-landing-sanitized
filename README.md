@@ -1,26 +1,48 @@
 # ULDA Landing Public Mirror
 
-This folder contains a sanitized public copy of the landing page project for academic use.
+Публічна санітизована копія лендингу ULDA, підготовлена для навчального аудиту репозиторію та демонстрації базової структури Next.js-проєкту.
 
-## What was removed
+## Призначення репозиторію
 
-- `.git` history from the original private repository
-- `.env.local` and any environment-specific secrets
-- database access and API routes
-- blog pages, authors pages, and post-loading logic
-- email sending logic from the licensing flow
+Цей репозиторій створено як безпечну публічну версію приватного production-проєкту. У ньому залишено лише інтерфейсну частину лендингу, потрібну для лабораторної роботи з дисципліни **«Технічна підтримка програмного забезпечення»**.
 
-## How to run
+## Що було вилучено під час наведення ладу
+
+- історію приватного репозиторію та службову папку `.git`;
+- файли середовища та потенційно чутливі конфігурації;
+- API-роути, доступ до бази даних і серверні інтеграції;
+- логіку надсилання email, блог і пов'язані внутрішні модулі;
+- артефакти збірки та інші непотрібні для публічного репозиторію файли.
+
+## Структура проєкту
+
+- `app/` — маршрути App Router, глобальні стилі та головна сторінка;
+- `components/` — повторно використовувані React-компоненти інтерфейсу;
+- `components/ui/` — базові UI-компоненти;
+- `lib/` — допоміжні функції;
+- `public/` — статичні ресурси;
+- `.env.example` — приклад файлу середовища без секретів;
+- `.gitignore` — правила виключення службових і чутливих файлів із Git;
+- `Dockerfile` — контейнеризація застосунку;
+- `LICENSE` — ліцензія на код;
+- `package.json` — залежності та скрипти запуску.
+
+## Запуск локально
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Застосунок буде доступний за адресою `http://localhost:3000`.
 
-## Notes
+## Перевірка production-збірки
 
-- This is a standalone Next.js App Router project.
-- It keeps only the UI needed to demonstrate the landing page.
-- Metadata was rewritten to be generic and non-sensitive.
+```bash
+npm run build
+npm run start
+```
+
+## Ліцензія
+
+Проєкт поширюється за ліцензією MIT. Деталі наведено у файлі `LICENSE`.

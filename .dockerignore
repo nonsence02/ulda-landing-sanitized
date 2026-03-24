@@ -3,4 +3,7 @@ node_modules
 .git
 .gitignore
 .env
-.env.local
+.env.*
+Dockerfile*
+README.md
+*.log
