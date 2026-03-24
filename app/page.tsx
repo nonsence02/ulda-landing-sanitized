@@ -47,7 +47,7 @@ export default function LandingPage() {
             aria-labelledby="hero-title"
             className="border-b border-border/60 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.14),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
           >
-            <div className="container mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20 xl:py-24">
+            <div className="section-shell py-14 md:py-20 xl:py-24">
               <div className="grid gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.9fr)] xl:gap-12">
                 <header className="space-y-6 self-center">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90 sm:text-sm">
@@ -123,12 +123,12 @@ export default function LandingPage() {
           </section>
 
           <section id="thesis-overview" aria-labelledby="overview-title" className="py-12 md:py-16 xl:py-20">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-8 max-w-3xl space-y-3 md:mb-10">
-                <h2 id="overview-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading md:mb-10">
+                <h2 id="overview-title" className="section-title">
                   Зміст дослідження
                 </h2>
-                <p className="text-sm leading-6 text-muted-foreground md:text-base">
+                <p className="section-copy">
                   Нижче подано ключові змістові блоки бакалаврської роботи, підготовлені для публічної презентації
                   теми, мети та результатів дослідження.
                 </p>
@@ -207,9 +207,9 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="keywords-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="keywords-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="keywords-title" className="section-title">
                   Ключові слова
                 </h2>
               </header>
@@ -234,9 +234,9 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="relevance-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="relevance-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="relevance-title" className="section-title">
                   Актуальність теми
                 </h2>
               </header>
@@ -249,9 +249,9 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="goals-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="goals-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="goals-title" className="section-title">
                   Мета дослідження
                 </h2>
               </header>
@@ -264,9 +264,9 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="tasks-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="tasks-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="tasks-title" className="section-title">
                   Завдання та очікувані результати
                 </h2>
               </header>
@@ -311,9 +311,9 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="methodology-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="methodology-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="methodology-title" className="section-title">
                   Методологія дослідження
                 </h2>
               </header>
@@ -333,12 +333,12 @@ export default function LandingPage() {
           </section>
 
           <section id="project-links" aria-labelledby="links-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="links-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="links-title" className="section-title">
                   Корисні матеріали
                 </h2>
-                <p className="text-sm leading-6 text-muted-foreground md:text-base">
+                <p className="section-copy">
                   Розділ містить публічні посилання на поточний текстовий опис дослідження, репозиторій і технічну
                   документацію, пов'язану з предметною областю.
                 </p>
@@ -364,14 +364,14 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="visual-title" className="py-8 md:py-10 xl:py-12">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
+            <div className="section-shell">
               <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:items-start xl:gap-8">
                 <div>
-                  <header className="mb-6 max-w-3xl space-y-3">
-                    <h2 id="visual-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+                  <header className="section-heading">
+                    <h2 id="visual-title" className="section-title">
                       Ілюстративна модель дослідження
                     </h2>
-                    <p className="text-sm leading-6 text-muted-foreground md:text-base">
+                    <p className="section-copy">
                       Схематичне представлення демонструє, як безстанова автентифікація, мережева маршрутизація та
                       мінімізація метаданих поєднуються в єдиній архітектурній моделі вебсервісу.
                     </p>
@@ -436,9 +436,9 @@ export default function LandingPage() {
           </section>
 
           <section aria-labelledby="contacts-title" className="py-8 pb-14 md:py-10 md:pb-16 xl:py-12 xl:pb-20">
-            <div className="container mx-auto max-w-6xl px-4 md:px-6">
-              <header className="mb-6 max-w-3xl space-y-3">
-                <h2 id="contacts-title" className="text-2xl font-semibold tracking-tight md:text-3xl xl:text-[2rem]">
+            <div className="section-shell">
+              <header className="section-heading">
+                <h2 id="contacts-title" className="section-title">
                   Контактна інформація
                 </h2>
               </header>
