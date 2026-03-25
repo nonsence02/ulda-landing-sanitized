@@ -6,7 +6,7 @@
 
 Це frontend-орієнтований Next.js + TypeScript проєкт, який збирається як статичний сайт і публікується через GitHub Pages. Репозиторій не містить реального бекенду, production-бази даних, кеш-сервера, message broker або секретозалежної інфраструктури.
 
-## Швидкий старт з чистої машини
+## Швидкий старт
 
 ### 1. Встанови потрібне ПЗ
 
@@ -14,11 +14,15 @@
 - `Node.js 20.x`
 - `npm 10+`
 - `PowerShell 7+` для helper-скриптів у `docs/scripts/` або звичайний shell для ручного запуску npm-команд
-- `Docker` не є обов'язковим; Dockerfile у репозиторії не є основним production-шляхом для поточного GitHub Pages deployment
 
 ### 2. Підготуй середовище
 
-Проєкт не потребує секретів для локального запуску. Файл `.env.example` залишено як довідковий шаблон, але для цієї санітизованої версії зазвичай не потрібно створювати `.env.local`.
+Проєкт не потребує секретів для локального запуску. У `.env.example` наведено only logging-related defaults:
+
+```bash
+LOG_LEVEL=INFO
+NEXT_PUBLIC_LOG_LEVEL=INFO
+```
 
 ### 3. Клонуй репозиторій
 
@@ -53,6 +57,17 @@ npm run docs:build
 npm run docs:check
 ```
 
+## Logging та error handling
+
+У репозиторії використовується lightweight structured logger без окремого backend logging service.
+
+- log levels: `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`
+- базовий рівень логування задається через `LOG_LEVEL` або `NEXT_PUBLIC_LOG_LEVEL`
+- для static client runtime рівень також можна перевизначити без перекомпіляції через `localStorage` ключ `ulda.logLevel`
+- user-facing error pages: `app/not-found.tsx` і `app/global-error.tsx`
+
+Деталі дивись у `docs/logging.md`.
+
 ## Project-specific notes
 
 - primary deployment model: `GitHub Actions -> GitHub Pages`
@@ -65,6 +80,7 @@ npm run docs:check
 - `docs/deployment.md` - модель розгортання, архітектура, перевірка healthy state
 - `docs/update.md` - процедура оновлення
 - `docs/backup.md` - стратегія backup/restore для цього репозиторію
+- `docs/logging.md` - логування, рівні логів, обробка помилок і runtime configuration
 - `docs/generate_docs.md` - генерація TypeDoc документації
 - `docs/architecture.md` - архітектурні рішення
 - `docs/component-interactions.md` - взаємодія компонентів
