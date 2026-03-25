@@ -108,11 +108,11 @@ The following potential areas were intentionally **not** implemented as part of 
 
 ## 6. Before / after comparison
 
-Post-optimization values are documented only after re-running the build and validating which metrics were actually re-measured.
+Post-optimization values below were added only for metrics that were actually re-measured after the optimization changes.
 
 | Metric | Baseline | Post-optimization | Improvement |
 | --- | --- | --- | --- |
-| First load JS | 127 kB | Pending | Pending |
+| First load JS | 127 kB | 126 kB | 0.79% lower |
 | Performance | 90 | N/A | N/A |
 | Accessibility | 95 | N/A | N/A |
 | Best Practices | 100 | N/A | N/A |
@@ -124,3 +124,30 @@ Post-optimization values are documented only after re-running the build and vali
 | Speed Index | 0.4 s | N/A | N/A |
 | Generic measured client click totalDuration | 77 ms | N/A | N/A |
 | Code snippet copy interaction | N/A | N/A | N/A |
+
+## 7. Implemented optimization changes
+
+The following practical optimizations were implemented:
+
+1. **Per-language content splitting**  
+   The bilingual thesis content was split into separate Ukrainian and English modules instead of shipping both translations in one eager client import.
+
+2. **Lazy loading of non-default language content**  
+   Ukrainian remains the default eager payload. English thesis content is loaded only when the user explicitly switches language.
+
+3. **Client-side translation caching after first load**  
+   After the first successful language switch, the loaded translation is cached in memory to avoid repeated dynamic imports.
+
+4. **Lightweight interaction profiling**  
+   A small profiling helper was added to measure important client interactions, with the current focus on the language switch action.
+
+## 8. Result interpretation
+
+The measured post-optimization improvement that can be stated confidently from real data is:
+
+- first load JavaScript decreased from `127 kB` to `126 kB`;
+- this equals an improvement of approximately `0.79%`.
+
+This is a modest but real gain, which is reasonable for a small academic landing page that already started from a relatively lightweight baseline.
+
+Other Lighthouse metrics were **not re-measured** after the code changes within this lab task, so they remain marked as `N/A` in the comparison table rather than being fabricated.
