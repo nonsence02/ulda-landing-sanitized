@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { createLogger } from "@/lib/logger"
+import { measureClientInteraction } from "@/lib/performance"
 import { siteConfig } from "@/lib/site"
 import { thesisContent } from "@/lib/thesis-content"
 import type { Language } from "@/lib/thesis-content"
@@ -35,6 +36,19 @@ export default function LandingPage() {
       path: window.location.pathname,
     })
   }, [language])
+
+  async function handleLanguageChange(nextLanguage: Language) {
+    if (nextLanguage === language) {
+      return
+    }
+
+    await measureClientInteraction("language-switch", () => {
+      setLanguage(nextLanguage)
+    }, {
+      from: language,
+      to: nextLanguage,
+    })
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -82,7 +96,7 @@ export default function LandingPage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/90 sm:text-sm">
                       {content.stageLabel}
                     </p>
-                    <LanguageSwitcher activeLanguage={language} onChange={setLanguage} />
+                    <LanguageSwitcher activeLanguage={language} onChange={handleLanguageChange} />
                   </div>
                   <div className="space-y-5">
                     <h1
