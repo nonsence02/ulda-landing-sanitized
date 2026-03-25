@@ -1,6 +1,7 @@
-﻿import type React from "react"
+import type React from "react"
 import type { Metadata, Viewport } from "next"
 import "./globals.css"
+import { RuntimeMonitor } from "@/components/runtime-monitor"
 import { ThemeProvider } from "@/components/theme-provider"
 import { siteConfig } from "@/lib/site"
 
@@ -82,6 +83,7 @@ export default function RootLayout({
           Перейти до основного вмісту
         </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          <RuntimeMonitor />
           {children}
         </ThemeProvider>
       </body>

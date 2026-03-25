@@ -4,10 +4,14 @@ import { useState } from "react"
 import { Copy, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { captureError } from "@/lib/errors"
+import { createLogger } from "@/lib/logger"
 
 export interface CodeSnippetProps {
   code: string
 }
+
+const logger = createLogger("code-snippet")
 
 /**
  * Displays a short terminal-style command snippet with clipboard support.
@@ -18,10 +22,22 @@ export interface CodeSnippetProps {
 export function CodeSnippet({ code }: CodeSnippetProps) {
   const [copied, setCopied] = useState(false)
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      logger.info("Command copied to clipboard", { code })
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (error) {
+      captureError(error, {
+        module: "code-snippet",
+        context: {
+          code,
+          operation: "clipboard.writeText",
+        },
+        fallbackMessage: "Failed to copy command to clipboard",
+      })
+    }
   }
 
   return (
