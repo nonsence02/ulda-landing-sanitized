@@ -13,7 +13,7 @@ export type NormalizedAppError = {
   stack?: string
 }
 
-type CaptureErrorOptions = {
+export type CaptureErrorOptions = {
   module: string
   level?: Extract<LogLevel, "ERROR" | "CRITICAL">
   context?: AppErrorContext

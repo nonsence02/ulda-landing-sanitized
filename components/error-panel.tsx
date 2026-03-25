@@ -9,9 +9,9 @@ import { buildIssueReportUrl } from "@/lib/errors"
 import { errorMessages, resolveErrorLanguage } from "@/lib/error-messages"
 import { createLogger } from "@/lib/logger"
 
-type ErrorKind = "notFound" | "global"
+export type ErrorKind = "notFound" | "global"
 
-type ErrorPanelProps = {
+export type ErrorPanelProps = {
   kind: ErrorKind
   errorId: string
   issueModule: string
