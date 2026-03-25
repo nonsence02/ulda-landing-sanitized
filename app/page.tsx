@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { startTransition, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, BookOpenText, FileText, Network, ShieldCheck } from "lucide-react"
@@ -11,8 +11,9 @@ import { LanguageSwitcher } from "@/components/language-switcher"
 import { createLogger } from "@/lib/logger"
 import { measureClientInteraction } from "@/lib/performance"
 import { siteConfig } from "@/lib/site"
-import { thesisContent } from "@/lib/thesis-content"
-import type { Language } from "@/lib/thesis-content"
+import { loadThesisTranslation } from "@/lib/thesis-content"
+import { ukThesisContent } from "@/lib/thesis-content.uk"
+import type { Language, ThesisTranslation } from "@/lib/thesis-content"
 
 const overviewIcons = [BookOpenText, ShieldCheck, Network, FileText]
 const logger = createLogger("landing-page")
@@ -28,7 +29,10 @@ const logger = createLogger("landing-page")
  */
 export default function LandingPage() {
   const [language, setLanguage] = useState<Language>("uk")
-  const content = thesisContent[language]
+  const [content, setContent] = useState<ThesisTranslation>(ukThesisContent)
+  const translationCacheRef = useRef<Partial<Record<Language, ThesisTranslation>>>({
+    uk: ukThesisContent,
+  })
 
   useEffect(() => {
     logger.info("Landing page content rendered", {
@@ -42,12 +46,26 @@ export default function LandingPage() {
       return
     }
 
-    await measureClientInteraction("language-switch", () => {
-      setLanguage(nextLanguage)
-    }, {
-      from: language,
-      to: nextLanguage,
-    })
+    await measureClientInteraction(
+      "language-switch",
+      async () => {
+        let nextContent = translationCacheRef.current[nextLanguage]
+
+        if (!nextContent) {
+          nextContent = await loadThesisTranslation(nextLanguage)
+          translationCacheRef.current[nextLanguage] = nextContent
+        }
+
+        startTransition(() => {
+          setLanguage(nextLanguage)
+          setContent(nextContent)
+        })
+      },
+      {
+        from: language,
+        to: nextLanguage,
+      }
+    )
   }
 
   const structuredData = {
