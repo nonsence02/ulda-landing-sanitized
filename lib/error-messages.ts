@@ -1,6 +1,6 @@
 import type { Language } from "@/lib/thesis-content"
 
-type ErrorMessageBundle = {
+export type ErrorMessageBundle = {
   title: string
   description: string
   primaryAction: string
@@ -10,7 +10,7 @@ type ErrorMessageBundle = {
   errorIdLabel: string
 }
 
-type ErrorMessages = {
+export type ErrorMessages = {
   notFound: ErrorMessageBundle
   global: ErrorMessageBundle
 }
