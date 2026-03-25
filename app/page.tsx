@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, BookOpenText, FileText, Network, ShieldCheck } from "lucide-react"
@@ -8,11 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Footer } from "@/components/footer"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { createLogger } from "@/lib/logger"
 import { siteConfig } from "@/lib/site"
 import { thesisContent } from "@/lib/thesis-content"
 import type { Language } from "@/lib/thesis-content"
 
 const overviewIcons = [BookOpenText, ShieldCheck, Network, FileText]
+const logger = createLogger("landing-page")
 
 /**
  * Renders the main bilingual bachelor thesis landing page.
@@ -26,6 +28,14 @@ const overviewIcons = [BookOpenText, ShieldCheck, Network, FileText]
 export default function LandingPage() {
   const [language, setLanguage] = useState<Language>("uk")
   const content = thesisContent[language]
+
+  useEffect(() => {
+    logger.info("Landing page content rendered", {
+      language,
+      path: window.location.pathname,
+    })
+  }, [language])
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
